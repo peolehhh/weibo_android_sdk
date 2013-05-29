@@ -216,10 +216,14 @@ public class WeiboDialog extends Dialog {
 		public void onPageFinished(WebView view, String url) {
 			Log.d(TAG, "onPageFinished URL: " + url);
 			super.onPageFinished(view, url);
-			if (mSpinner.isShowing()) {
-				mSpinner.dismiss();
+			try {
+				if (mSpinner.isShowing()) {
+					mSpinner.dismiss();
+				}
+				mWebView.setVisibility(View.VISIBLE);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			mWebView.setVisibility(View.VISIBLE);
 		}
 
 		public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
