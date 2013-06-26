@@ -121,7 +121,9 @@ public class SsoHandler {
         // Otherwise fall back to traditional dialog.
         if (!bindSucced) {
             if(mWeibo!=null){
-                mWeibo.startAuthDialog(mAuthActivity, mAuthDialogListener);
+            	WeiboParameters params = new WeiboParameters();
+    			params.add("forcelogin", "true");
+                mWeibo.startDialog(mAuthActivity, params, mAuthDialogListener);
             }
             
         }
@@ -248,7 +250,9 @@ public class SsoHandler {
                         Log.d("Weibo-authorize",
                                 "Failed to receive access token by SSO");
 //                        startDialogAuth(mAuthActivity, mAuthPermissions);
-                        mWeibo.startAuthDialog(mAuthActivity, mAuthDialogListener);
+                        WeiboParameters params = new WeiboParameters();
+            			params.add("forcelogin", "true");
+                        mWeibo.startDialog(mAuthActivity, params, mAuthDialogListener);
                     }
                 }
 
