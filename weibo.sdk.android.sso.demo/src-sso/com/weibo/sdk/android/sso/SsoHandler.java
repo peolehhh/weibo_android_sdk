@@ -1,6 +1,5 @@
 package com.weibo.sdk.android.sso;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -12,18 +11,17 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
-import android.webkit.CookieSyncManager;
 
 import com.sina.sso.RemoteSSO;
 import com.weibo.sdk.android.Oauth2AccessToken;
 import com.weibo.sdk.android.Weibo;
 import com.weibo.sdk.android.WeiboAuthListener;
 import com.weibo.sdk.android.WeiboDialogError;
+import com.weibo.sdk.android.WeiboParameters;
 import com.weibo.sdk.android.util.Utility;
 /**
  * 该类用于处理sso 认证功能，通过sso，无需输入用户名、密码即可以通过微博账号访问经过授权的第三方应用，\r\n
@@ -85,7 +83,9 @@ public class SsoHandler {
                             mAuthActivityCode);
                     if (!singleSignOnStarted) {
 //                        startDialogAuth(mAuthActivity, new String[]{});
-                        mWeibo.startAuthDialog(mAuthActivity, mAuthDialogListener);
+                    	WeiboParameters params = new WeiboParameters();
+            			params.add("forcelogin", "true");
+                        mWeibo.startDialog(mAuthActivity, params, mAuthDialogListener);
                     }
                 } catch (RemoteException e) {
                     e.printStackTrace();
