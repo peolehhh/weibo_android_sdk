@@ -68,7 +68,9 @@ public class SsoHandler {
         conn = new ServiceConnection() {
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                mWeibo.startAuthDialog(mAuthActivity, mAuthDialogListener);
+            	WeiboParameters params = new WeiboParameters();
+    			params.add("forcelogin", "true");
+                mWeibo.startDialog(mAuthActivity, params, mAuthDialogListener);
             }
 
             @Override
